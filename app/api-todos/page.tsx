@@ -1,9 +1,9 @@
 import React from 'react';
-import TodoStateOnlyApp from './components/TodoStateOnlyApp';
-import { getTodos } from '@/lib/todos';
+import ApiTodoList from './components/ApiTodoList';
+import { getTasks } from '@/lib/tasks';
 
-export default async function TodoPage() {
-  const initialTodos = await getTodos();
+export default async function ApiTodosPage() {
+  const data = await getTasks({ limit: 15, skip: 0 });
 
   return (
     <main className="min-h-screen p-6 md:p-10 bg-white text-dark-70">
@@ -11,12 +11,12 @@ export default async function TodoPage() {
         <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-gray-100">
           <header className="mb-6 border-b border-gray-100 pb-4">
             <h1 className="text-2xl md:text-3xl font-bold text-dark-70 text-center">
-              Daftar Tugas (Todo List)
+              Daftar Tugas (API DummyJSON)
             </h1>
           </header>
 
-          {/* Halaman Beranda: Menggunakan State Murni (In-Memory) */}
-          <TodoStateOnlyApp initialTodos={initialTodos} />
+          {/* Halaman Integrasi External API */}
+          <ApiTodoList initialTasks={data.tasks} />
         </div>
       </div>
     </main>
